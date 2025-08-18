@@ -7,6 +7,7 @@ public class ChatWindowAdd extends javax.swing.JFrame implements ChatObservable 
     public ChatWindowAdd(ChatObserver chatObserver) {
         this.chatObserver = chatObserver;
         initComponents();
+        setVisible(true);
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

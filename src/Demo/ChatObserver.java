@@ -8,7 +8,8 @@ public class ChatObserver {
     public void addChatBox(ChatObservable obj) {
         chatObservable[nextIndex++] = obj;
     }
-    public void setMessage(String msg){
+
+    public void setMessage(String msg) {
         for (int i = 0; i < nextIndex; i++) {
             chatObservable[i].sendMessage(msg);
         }

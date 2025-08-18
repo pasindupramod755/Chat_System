@@ -1,11 +1,17 @@
 package Demo;
 
-public class ChatWindow extends javax.swing.JFrame implements ChatObservable{
+public class ChatWindow extends javax.swing.JFrame implements ChatObservable {
+
     private ChatObserver chatObserver;
-    
-    public ChatWindow(ChatObserver chatObserver) {
+    private String name;
+
+    public ChatWindow(String name, ChatObserver chatObserver) {
         this.chatObserver = chatObserver;
+        this.name = name;
+        setTitle(name);
         initComponents();
+        jLabel1.setText(name);
+        setVisible(true);
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -45,6 +51,11 @@ public class ChatWindow extends javax.swing.JFrame implements ChatObservable{
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Send");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,12 +103,20 @@ public class ChatWindow extends javax.swing.JFrame implements ChatObservable{
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+        ChatWindowAdd c1 = new ChatWindowAdd(chatObserver);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        
+        if (!jTextField1.getText().equalsIgnoreCase("")) {
+            chatObserver.setMessage(getTitle()+" - "+jTextField1.getText());
+        }
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (!jTextField1.getText().equalsIgnoreCase("")) {
+            chatObserver.setMessage(getTitle()+" - "+jTextField1.getText());
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -111,6 +130,6 @@ public class ChatWindow extends javax.swing.JFrame implements ChatObservable{
 
     @Override
     public void sendMessage(String msg) {
-
+        jTextArea1.append(msg+"\n");
     }
 }

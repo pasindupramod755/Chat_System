@@ -38,6 +38,11 @@ public class ChatWindowAdd extends javax.swing.JFrame implements ChatObservable 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Add");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,8 +82,22 @@ public class ChatWindowAdd extends javax.swing.JFrame implements ChatObservable 
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-
+        if (!jTextField1.getText().equalsIgnoreCase("")) {
+            if (chatObserver.userNameCheck(jTextField1.getText())) {
+                chatObserver.addChatBox(new ChatWindow(jTextField1.getText(), chatObserver));
+                dispose();
+            }
+        }
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (!jTextField1.getText().equalsIgnoreCase("")) {
+            if (chatObserver.userNameCheck(jTextField1.getText())) {
+                chatObserver.addChatBox(new ChatWindow(jTextField1.getText(), chatObserver));
+                dispose();
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -90,5 +109,10 @@ public class ChatWindowAdd extends javax.swing.JFrame implements ChatObservable 
     @Override
     public void sendMessage(String msg) {
 
+    }
+
+    @Override
+    public String getUserName() {
+        return null;
     }
 }

@@ -14,4 +14,13 @@ public class ChatObserver {
             chatObservable[i].sendMessage(msg);
         }
     }
+    
+    public boolean userNameCheck(String userName){
+        for (int i = 0; i < nextIndex; i++) {
+            if (chatObservable[i].getUserName().equalsIgnoreCase(userName)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

@@ -108,13 +108,15 @@ public class ChatWindow extends javax.swing.JFrame implements ChatObservable {
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         if (!jTextField1.getText().equalsIgnoreCase("")) {
-            chatObserver.setMessage(getTitle()+" - "+jTextField1.getText());
+            chatObserver.setMessage(getTitle() + " - " + jTextField1.getText());
+            jTextField1.setText("");
         }
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (!jTextField1.getText().equalsIgnoreCase("")) {
-            chatObserver.setMessage(getTitle()+" - "+jTextField1.getText());
+            chatObserver.setMessage(getTitle() + " - " + jTextField1.getText());
+            jTextField1.setText("");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -130,6 +132,14 @@ public class ChatWindow extends javax.swing.JFrame implements ChatObservable {
 
     @Override
     public void sendMessage(String msg) {
-        jTextArea1.append(msg+"\n");
+        if (!msg.substring(0, getTitle().length()).equalsIgnoreCase(getTitle())) {
+            jTextArea1.append(msg + "\n");
+        } else {
+            jTextArea1.append("Me" + msg.substring(getTitle().length()) + "\n");
+        }
+    }
+
+    public String getUserName() {
+        return getTitle();
     }
 }

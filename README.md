@@ -31,25 +31,38 @@ The system allows sending messages, creating new message windows, and simulates 
 
 ### 🔑 Class Design (simplified)
 ```java
-// Base class
-public abstract class Message {
-    protected String sender;
-    protected String content;
-    public abstract void display(); // Polymorphic behavior
-}
+// Observer (manages chat boxes)
+public class ChatObserver {
 
-// Text Message
-public class TextMessage extends Message {
-    @Override
-    public void display() {
-        System.out.println(sender + ": " + content);
+    private ChatObservable[] chatObservable = new ChatObservable[100];
+    private int nextIndex;
+
+    // Add a new chat box (Observable)
+    public void addChatBox(ChatObservable obj) {
+        chatObservable[nextIndex++] = obj;
+    }
+
+    // Broadcast message to all chat boxes
+    public void setMessage(String msg) {
+        for (int i = 0; i < nextIndex; i++) {
+            chatObservable[i].sendMessage(msg);
+        }
+    }
+
+    // Check if username already exists
+    public boolean userNameCheck(String userName) {
+        for (int i = 0; i < nextIndex; i++) {
+            if (chatObservable[i].getUserName().equalsIgnoreCase(userName)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
 
-// Media Message
-public class MediaMessage extends Message {
-    @Override
-    public void display() {
-        System.out.println(sender + " sent a media file: " + content);
+                return false;
+            }
+        }
+        return true;
     }
 }
